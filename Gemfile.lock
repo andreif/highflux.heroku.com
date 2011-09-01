@@ -33,7 +33,6 @@ GEM
     multi_json (1.0.3)
     nokogiri (1.5.0)
     posix-spawn (0.3.6)
-    pygmentize (0.0.3)
     rack (1.3.2)
     redcarpet (1.17.2)
     sass (3.1.7)
@@ -59,7 +58,6 @@ DEPENDENCIES
   haml
   mongoid
   nokogiri
-  pygmentize
   redcarpet
   sass
   sinatra

@@ -11,4 +11,3 @@ def test(@arg)
   puts $args
 end
 ```
-

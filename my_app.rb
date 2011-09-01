@@ -4,7 +4,8 @@ require 'redcarpet'
 require 'haml'
 require 'nokogiri'
 require 'albino'
-require 'pygmentize'
+# require 'pygmentize' # worked only for cedar
+require 'net/http'
 
 Tilt.register 'markdown', Redcarpet
 Tilt.register 'mkd',      Redcarpet
@@ -29,7 +30,10 @@ module MyApp
       def syntax_highlighter(html)
         doc = Nokogiri::HTML(html)
         doc.search("//pre[@lang]").each do |pre|
-          pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
+          #pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
+          pre.replace Net::HTTP.post_form(
+            URI.parse('http://pygments.appspot.com/'), {'code'=>pre.text.rstrip, 'lang'=>pre[:lang]}
+          ).body
         end
         doc.to_s
       end

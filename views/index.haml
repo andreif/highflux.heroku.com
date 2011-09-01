@@ -6,5 +6,4 @@
     %li.note
       .date= note.date.strftime('%b %d, %Y')
       %h3
-        %a{href:'/'+note.to_param}= note.title#link_to note.title, note
-        
+        %a{href:'/'+note.to_param}= note.title

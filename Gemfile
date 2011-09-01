@@ -9,7 +9,7 @@ gem 'coffee-script'
 gem 'redcarpet'
 gem 'nokogiri'
 gem 'albino'
-gem 'pygmentize'
+# gem 'pygmentize' # worked only for cedar
 
 gem 'mongoid'
 gem 'bson_ext'
