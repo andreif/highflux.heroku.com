@@ -9,5 +9,7 @@ require 'rubygems'
 require 'rack'
 require 'sinatra'
 
-require './app.rb'
-Rack::Handler::FastCGI.run Sinatra::Application
+require '../my_app.rb'
+Rack::Handler::FastCGI.run MyApp::Application
+# require './app.rb'
+# Rack::Handler::FastCGI.run Sinatra::Application
