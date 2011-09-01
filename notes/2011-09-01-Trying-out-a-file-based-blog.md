@@ -4,6 +4,16 @@ Looking for a new place for making notes about my experience with new technologi
 
 BTW, I plan to update the notes using the embedded editor at GitHub and automatically deploy at fluxflex.com. Let's see how it will work.
 
+### Updates:
+
+ - fluxflex requires another dir structure, which seems compatible with heroku
+ - I feel that quite soon GitHub will allow not only edit files but also rename and create new ones.
+
+### Todo:
+
+ - change structure to deploy to fluxflex
+ - 
+
 Example of code highlighting:
 
 ```ruby
