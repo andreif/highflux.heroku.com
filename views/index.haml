@@ -1,0 +1,10 @@
+%h2 Notes
+- if @notes.empty? or @notes.nil?
+  No published notes found
+%ul.notes
+  - for note in @notes
+    %li.note
+      .date= note.date.strftime('%b %d, %Y')
+      %h3
+        %a{href:'/'+note.to_param}= note.title#link_to note.title, note
+        

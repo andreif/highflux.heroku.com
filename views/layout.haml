@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %title= @title
+    %link{rel:"stylesheet", href:"/css/pygments.css", type:"text/css", media:"screen", charset:"utf-8"} 
+    
+  %body
+    %style
+      :sass
+        a
+          text-decoration: none
+          color: #00a
+        body
+          max-width: 600px
+          margin: 20px auto
+          background-color: #eee
+          line-height: 150%
+          font-family: Georgia
+        div.highlight
+          margin-left: 10px
+          line-height: 110%
+          border-left: solid 5px #ddd
+          padding-left: 10px
+        h1,h2,h3,h4
+          font-family: Arial
+        ul.notes, ul.notes li
+          margin: 0
+          padding: 0
+        ul.notes li
+          h3
+            margin-top: 0
+          .date
+            float: right
+          
+          
+    = yield
+    %br
+    %br
+    %br
+    %hr
+    %center{style:'font-size: 70%'}
+      / <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /></a><br />
+      / This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Andrei Fokau</span> is licensed under a 
+      <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">&copy; Andrei Fokau 2011 CC BY 3.0</a>
+      / <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>
