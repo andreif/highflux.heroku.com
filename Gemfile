@@ -7,7 +7,7 @@ gem 'haml'
 gem 'sass'
 gem 'coffee-script'
 gem 'redcarpet'
-#gem 'nokogiri'
+gem 'nokogiri'
 gem 'albino'
 gem 'pygmentize'
 
