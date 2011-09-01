@@ -16,6 +16,4 @@ gem 'bson_ext'
 gem 'activesupport'
 gem 'activemodel'
 
-# gem 'pygments.rb'
-
 # gem 'mail'
