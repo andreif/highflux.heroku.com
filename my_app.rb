@@ -3,7 +3,7 @@ require './note'
 require 'redcarpet'
 require 'haml'
 require 'nokogiri'
-require 'albino'
+# require 'albino'
 # require 'pygmentize' # worked only for cedar
 require 'net/http'
 

@@ -8,7 +8,7 @@ gem 'sass'
 gem 'coffee-script'
 gem 'redcarpet'
 gem 'nokogiri'
-gem 'albino'
+# gem 'albino'
 # gem 'pygmentize' # worked only for cedar
 
 gem 'mongoid'
