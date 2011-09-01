@@ -1,0 +1,2 @@
+rvm use default@$(basename $(pwd)) --create # note: it won't work with spaces!
+source .apprc # sensitive app settings
