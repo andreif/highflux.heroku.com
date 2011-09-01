@@ -15,5 +15,3 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'activesupport'
 gem 'activemodel'
-
-# gem 'mail'
