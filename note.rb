@@ -1,63 +1,68 @@
-require 'active_model'
+require 'mongoid'
+require './git_hub'
+require 'redcarpet'
+require 'nokogiri'
+# require 'albino'; require 'pygmentize' # worked only for cedar
+require 'net/http'
+
 
 class Note
+  include Mongoid::Document
   
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend  ActiveModel::Naming
-  include ActiveModel::MassAssignmentSecurity
+  field :title, type: String
+  field :path, type: String
+  field :source, type: String
+  field :html, type: String
+  field :sha, type: String
+  field :created_at, type: DateTime
+  field :modifed_at, type: DateTime
   
-  attr_accessible :name, :text
-  attr_accessor :name, :text, :title
   
-  def initialize hash
-    hash.each do |k,v|
-      instance_variable_set :"@#{k}", v
+  def self.fetch_from_github
+    GitHub.config(user: 'andreif', repo: 'notes', ref: 'master').root_files(/^\d{4}.+\.md$/).collect do |hash|
+      next if Note.where(path: hash['path'], sha: hash['sha']).exists?
+      Note.where(path: hash['path']).delete
+      Note.create(
+        title: get_title(hash),
+        path: hash['path'],
+        sha: hash['sha'],
+        source: hash['content'],
+        html: render(hash['content']),
+        created_at: DateTime.parse(hash['path'][0..10]),
+        modified_at: Time.now
+      )
     end
   end
   
-  def self.all
-    Dir['notes/*.md'].collect do |f|
-      self.create_from_file(f)
-    end.compact
+  def self.find_by_param url
+    where(path: url+'.md').first
   end
   
-  def self.create_from_file(f)
-    Note.new name: File.basename(f,'.md'), text: IO.read(f) unless File.basename(f) =~ /^_/
-  end
-  
-  def self.find(id)
-    if f = Dir["notes/#{id}.md"].first
-      self.create_from_file(f)
-    end
-  end
-    
-  def date
-    DateTime.parse name[0..10]
-  end
-  
-  def title
-    if text.strip =~ /^\# ([^\n]+)/
+  def self.get_title hash
+    if hash['content'].strip =~ /^\# ([^\n]+)/
       $1
     else
-      name.gsub('-',' ')[11..-1]
-    end
-  end
-  
-  def body
-    if text.strip =~ /(\s*\# [^\n]+)/
-      text[$1.length+1..-1]
-    else
-      text
+      hash['path'].gsub(/\.md$/,'').gsub('-',' ')[11..-1]
     end
   end
   
   def to_param
-    name
+    path.gsub(/\.md$/,'')
   end
   
-  def to_s
-    name
+  def self.render text
+    text = text[$1.length..-1] if text =~ /^(\s*\# [^\n]+)/
+    options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
+    html = Redcarpet.new(text, *options).to_html
+    doc = Nokogiri::HTML(html)
+    doc.search("//pre[@lang]").each do |pre|
+      #pre.replace Albino.colorize(pre.text.rstrip, pre[:lang])
+      if body = Net::HTTP.post_form(
+        URI.parse('http://pygments.appspot.com/'), {'code'=>pre.text.rstrip, 'lang'=>pre[:lang]}
+      ).body
+        pre.replace body
+      end
+    end
+    doc.to_s
   end
-  
 end

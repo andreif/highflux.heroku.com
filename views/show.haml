@@ -2,9 +2,10 @@
 %h1= @note.title
 %small
   %p
-    = @note.date.strftime('Published %b %d, %Y by')
+    = @note.created_at.strftime('Published %b %d, %Y by')
     %a{href:'/aboutme'} Andrei Fokau
     / %a{href:'http://twitter.com/highflux'} @highflux
 
 .note
-  ~ syntax_highlighter render_markdown @note.body
+  ~ @note.html
+  ~# syntax_highlighter render_markdown @note.body

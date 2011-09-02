@@ -1,4 +1,4 @@
-# Personal blog
+# A blog engine
 
 The following directories and their contents are Copyright Andrei Fokau. You may not reuse anything therein without my permission:
 

@@ -1,2 +1,2 @@
-require './my_app'
-run MyApp::Application
+require './my_notes'
+run MyNotes::Application
