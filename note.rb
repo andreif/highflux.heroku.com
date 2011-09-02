@@ -52,7 +52,7 @@ class Note
   
   def self.render text
     text = text[$1.length..-1] if text =~ /^(\s*\# [^\n]+)/
-    options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
+    options = [:autolink, :no_intraemphasis, :fenced_code, :gh_blockcode] # http://rubydoc.info/gems/redcarpet/1.17.2/Redcarpet
     html = Redcarpet.new(text, *options).to_html
     doc = Nokogiri::HTML(html)
     doc.search("//pre[@lang]").each do |pre|
