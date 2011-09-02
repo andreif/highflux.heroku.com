@@ -55,7 +55,7 @@ module MyNotes
     
     get '/' do
       @title = 'Notes'
-      @notes = Note.all
+      @notes = Note.order_by([:created_at, :desc]).all
       haml :index
     end
     
