@@ -69,6 +69,11 @@ module MyNotes
       redirect to '/'
     end
     
+    post '/update' do
+      Note.fetch_from_github
+      ''
+    end
+    
     get '/clear' do
       Note.delete_all
       redirect to '/'
