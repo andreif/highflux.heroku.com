@@ -36,7 +36,7 @@ module MyNotes
     
     helpers do
       def render_markdown(text)
-        options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
+        options = [:autolink, :fenced_code, :gh_blockcode] # :no_intraemphasis, 
         Redcarpet.new(text, *options).to_html
       end
 
